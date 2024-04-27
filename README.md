@@ -17,6 +17,20 @@
 - Courses service
 - Students service
 
+## Snipets
+
+**Add a new service**
+
+```bash
+spring init --java-version=21 \
+--build=gradle \
+--packaging=jar \
+--type=gradle-project \
+--artifact-id=school-service \
+--group-id=com.github.eiakojime \
+--dependencies=actuator,data-jdbc,postgresql,web \
+--extract school-service
+```
 
 ## Useful resources
 
