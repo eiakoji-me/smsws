@@ -11,8 +11,6 @@
 
 ## Services
 
----
-
 - Schools service
 - Courses service
 - Students service
