@@ -1,1 +1,1 @@
-# Microservice Workshop - School Management App
+## School Management App
