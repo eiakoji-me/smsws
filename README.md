@@ -12,14 +12,21 @@
 <h1 align="center">School Management App</h1>
 <p>In this project, our primary focus is to explore the core concepts of microservices architecture, leveraging the robust capabilities of the Spring Boot framework in tandem with the Spring Cloud project and associated tools. At the heart of our endeavor lies the demonstration of fundamental microservice principles within the context of a School Management application. Throughout our journey, we delve into a myriad of essential concepts, encompassing diverse areas such as service discovery (utilizing Netflix Eureka), proficiently handling rest clients through openfeign, RestTemplate, Java Reactive WebClient, and GraphQL.</p> 
 
-<p>Additionally, we delve into advanced topics including distributed tracing, configuration management with config servers, API gateway implementation, and the circuit breaker pattern integrated with resilience4j. Moreover, our exploration extends to incorporate pivotal elements like message brokering with RabbitMQ, event streaming utilizing Kafka, OAuth2 authentication for secure access, GraalVM for building native images, Swagger OpenAPI documentation for REST endpoints, and much more. Through this comprehensive endeavor, we aim to gain a profound understanding of microservices architecture and its practical application, equipping ourselves with the tools and knowledge necessary to architect resilient and scalable distributed systems.</p>
+<p>Additionally, we delve into advanced topics including distributed tracing, metrics collection, configuration management with config servers, API gateway implementation, and the circuit breaker pattern integrated with resilience4j. Moreover, our exploration extends to incorporate pivotal elements like message brokering with RabbitMQ, event streaming utilizing Kafka, OAuth2 authentication for secure access, GraalVM for building native images, Swagger OpenAPI documentation for REST endpoints, and much more. Through this comprehensive endeavor, we aim to gain a profound understanding of microservices architecture and its practical application, equipping ourselves with the tools and knowledge necessary to architect resilient and scalable distributed systems.</p>
 
 ## Services
 
 - [Schools service](https://github.com/eiakoji-me/smsws/tree/develop/school-service)
-- [Courses service]()
+- [Courses service](https://github.com/eiakoji-me/smsws/tree/develop/course-service)
 - [Students service](https://github.com/eiakoji-me/smsws/tree/develop/student-service)
 - [Registry service](https://github.com/eiakoji-me/smsws/tree/develop/registry-service)
+
+## Setting up Zipkin Server with docker image
+
+The Docker Zipkin project is able to build docker images, provide scripts and a docker-compose.yml for launching pre-built images. The quickest start is to run the latest image directly:
+
+    docker run -d -p 9411:9411 openzipkin/zipkin
+
 
 ## Snipets
 
@@ -40,3 +47,5 @@ spring init --java-version=21 \
 
 - Visit [mark down badges](https://ileriayo.github.io/markdown-badges/) to add badges related to tech stack for this repo
 - Visit [Spring CLoud Netflix](https://cloud.spring.io/spring-cloud-netflix/reference/html/) to learn more about Eureka
+- Visit [Zipkin Quick start] (https://zipkin.io/pages/quickstart) to learn more about zipkin server
+- Visit [Micrometer.io](https://micrometer.io/) to learn more on working with metrics
