@@ -9,6 +9,21 @@ spring:
         git:
           uri: https://github.com/eiakoji-me/smsws
           search-paths: config-service/configs
+          repos:
+            develop:
+              pattern:
+                - '*/develop'
+                - '*/feature'
+              uri: https://github.com/eiakoji-me/smsws/tree/develop
+            stage:
+              pattern:
+                - '*/stage'
+                - '*/main'
+              uri: https://github.com/eiakoji-me/smsws/tree/stage
+            prod:
+              pattern:
+                - '*/main'
+              uri: https://github.com/eiakoji-me/smsws
 management:
   endpoints:
     web:
