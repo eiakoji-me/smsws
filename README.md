@@ -47,5 +47,5 @@ spring init --java-version=21 \
 
 - Visit [mark down badges](https://ileriayo.github.io/markdown-badges/) to add badges related to tech stack for this repo
 - Visit [Spring CLoud Netflix](https://cloud.spring.io/spring-cloud-netflix/reference/html/) to learn more about Eureka
-- Visit [Zipkin Quick start] (https://zipkin.io/pages/quickstart) to learn more about zipkin server
+- Visit [Zipkin Quick start](https://zipkin.io/pages/quickstart) to learn more about zipkin server
 - Visit [Micrometer.io](https://micrometer.io/) to learn more on working with metrics
