@@ -1,5 +1,6 @@
 rootProject.name = 'school-management-app'
 
+include 'config-service'
 include 'registry-service'
 include 'school-service'
 include 'course-service'

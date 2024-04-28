@@ -43,9 +43,23 @@ spring init --java-version=21 \
 --extract school-service
 ```
 
+## Dependencies
+
+- Docker Compose
+- GraalVM
+- Micrometer Metrics
+- OpenFeign
+- PostgreSQL
+- Rest Template (Load Balanced)
+- Spring Actuator
+- Spring Cloud Config Server
+- Spring GraphQL
+- Spring Cloud Eureka
+- Zipkin
+
 ## Useful resources
 
 - Visit [mark down badges](https://ileriayo.github.io/markdown-badges/) to add badges related to tech stack for this repo
 - Visit [Spring CLoud Netflix](https://cloud.spring.io/spring-cloud-netflix/reference/html/) to learn more about Eureka
-- Visit [Zipkin Quick start] (https://zipkin.io/pages/quickstart) to learn more about zipkin server
+- Visit [Zipkin Quick start](https://zipkin.io/pages/quickstart) to learn more about zipkin server
 - Visit [Micrometer.io](https://micrometer.io/) to learn more on working with metrics
