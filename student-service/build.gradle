@@ -5,6 +5,10 @@ plugins {
 	id 'org.graalvm.buildtools.native' version '0.9.20'
 }
 
+ext {
+	springCloudVersion = "2023.0.1"
+}
+
 group = 'com.github.eiakojime'
 version = '0.0.1-SNAPSHOT'
 
@@ -24,10 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'commons-validator:commons-validator:1.8.0'
-
-//	implementation ('commons-validator:commons-validator:1.8.0') {
-//		exclude group: 'commons-logging', module: 'commons-logging'
-//	}
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	runtimeOnly 'org.postgresql:postgresql'
 	compileOnly 'org.projectlombok:lombok'
@@ -41,6 +42,12 @@ dependencies {
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
 
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+	}
 }
 
 tasks.named('test') {

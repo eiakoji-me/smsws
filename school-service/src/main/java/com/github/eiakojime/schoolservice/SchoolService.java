@@ -1,19 +1,21 @@
 package com.github.eiakojime.schoolservice;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -26,6 +28,20 @@ public class SchoolService {
 
   public static void main(String[] args) {
     SpringApplication.run(SchoolService.class, args);
+  }
+
+  @Bean
+  @LoadBalanced
+  RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
+
+  @Bean
+  ApplicationRunner init(RestTemplate restTemplate) {
+    return args -> {
+      Iterable<Course> courses = restTemplate.getForObject("http://COURSE-SERVICE:8082/courses", Iterable.class);
+      System.out.println(courses);
+    };
   }
 
 }
@@ -59,6 +75,18 @@ class SchoolControllerRest {
 @Builder
 record School(@Id UUID id, String name, LocalDateTime createdAt, LocalDateTime updatedAt) {
 }
+
+@Builder
+record Course(
+        Long id,
+        String name,
+        String department,
+        Integer credits,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt,
+        String createdBy,
+        String updatedBy
+){}
 
 @RestControllerAdvice
 class GlobalExceptionHandlers {

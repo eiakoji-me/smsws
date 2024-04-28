@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 @Configuration
-public class CourseServiceDev {
+public class CourseServiceWithLiveReload {
     @Bean
     @RestartScope
     @ServiceConnection
@@ -19,7 +19,7 @@ public class CourseServiceDev {
     public static void main(String[] args) {
         SpringApplication.
                 from(CourseService::main)
-                .with(CourseServiceDev.class)
+                .with(CourseServiceWithLiveReload.class)
                 .run(args);
     }
 }

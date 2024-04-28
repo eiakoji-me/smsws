@@ -1,11 +1,12 @@
 server:
-  port: 8083
+  port: 8761
 spring:
   application:
-    name: STUDENT-SERVICE
-  sql:
-    init:
-      mode: always
+    name: REGISTRY-SERVICE
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
 management:
   endpoints:
     web:
@@ -23,9 +24,3 @@ management:
       enabled: true
     os:
       enabled: true
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-    register-with-eureka: true
-    fetch-registry: true
