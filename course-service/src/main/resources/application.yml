@@ -23,6 +23,10 @@ management:
       enabled: true
     os:
       enabled: true
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
 eureka:
   client:
     serviceUrl:

@@ -44,8 +44,12 @@ public class SchoolService {
   @Bean
   ApplicationRunner init(CourseClient client) {
     return args -> {
-      Iterable<Course> courses = client.getAllCourses();
-      System.out.println(courses);
+      try {
+        Iterable<Course> courses = client.getAllCourses();
+        System.out.println(courses);
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
     };
   }
 
