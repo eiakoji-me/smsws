@@ -1,20 +1,20 @@
 package com.github.eiakojime.schoolservice;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,6 +23,17 @@ interface SchoolRepository extends CrudRepository<School, UUID> {
   Iterable<School> findByNameContains(String filter);
 }
 
+@FeignClient(name = "COURSE-SERVICE")
+@Component
+interface CourseClient {
+  @GetMapping("/courses")
+  Iterable<Course> getAllCourses();
+
+  @GetMapping("/courses/{id}")
+  Course getById(@PathVariable("id") long id);
+}
+
+@EnableFeignClients
 @SpringBootApplication
 public class SchoolService {
 
@@ -31,15 +42,9 @@ public class SchoolService {
   }
 
   @Bean
-  @LoadBalanced
-  RestTemplate restTemplate() {
-    return new RestTemplate();
-  }
-
-  @Bean
-  ApplicationRunner init(RestTemplate restTemplate) {
+  ApplicationRunner init(CourseClient client) {
     return args -> {
-      Iterable<Course> courses = restTemplate.getForObject("http://COURSE-SERVICE:8082/courses", Iterable.class);
+      Iterable<Course> courses = client.getAllCourses();
       System.out.println(courses);
     };
   }
