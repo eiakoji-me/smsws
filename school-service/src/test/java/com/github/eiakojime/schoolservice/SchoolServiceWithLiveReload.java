@@ -9,7 +9,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 
 @Configuration
-public class SchoolServiceDev {
+public class SchoolServiceWithLiveReload {
     @Bean
     @RestartScope
     @ServiceConnection
@@ -20,7 +20,7 @@ public class SchoolServiceDev {
     public static void main(String[] args) {
         SpringApplication.
                 from(SchoolService::main)
-                .with(SchoolServiceDev.class)
+                .with(SchoolServiceWithLiveReload.class)
                 .run(args);
     }
 }
