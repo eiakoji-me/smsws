@@ -1,4 +1,4 @@
---create schema if not exists student-schema;
+--create schema if not exists student_schema;
 
 create extension if not exists "uuid-ossp";
 
