@@ -1,4 +1,4 @@
-package com.github.eiakojime.courseservice;
+package com.github.eiakojime.studentservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.devtools.restart.RestartScope;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 @Configuration
-public class CourseServiceWithLiveReload {
+public class StudentServiceDevToolsApp {
     @Bean
     @RestartScope
     @ServiceConnection
@@ -17,9 +17,9 @@ public class CourseServiceWithLiveReload {
     }
 
     public static void main(String[] args) {
-        SpringApplication.
-                from(CourseService::main)
-                .with(CourseServiceWithLiveReload.class)
+        SpringApplication
+                .from(StudentService::main)
+                .with(StudentService.class)
                 .run(args);
     }
 }
