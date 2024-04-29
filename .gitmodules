@@ -1,0 +1,3 @@
+[submodule "config-service/configs"]
+	path = config-service/configs
+	url = https://github.com/eiakoji-me/smsws-configs.git
