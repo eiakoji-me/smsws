@@ -43,6 +43,12 @@ spring init --java-version=21 \
 --extract school-service
 ```
 
+## Environment variables
+
+```
+PROJECT_ROOT = 
+```
+
 ## Dependencies
 
 - Docker Compose
