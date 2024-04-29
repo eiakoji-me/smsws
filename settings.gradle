@@ -1,5 +1,6 @@
 rootProject.name = 'school-management-app'
 
+include 'apigateway'
 include 'config-service'
 include 'registry-service'
 include 'school-service'

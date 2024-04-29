@@ -1,0 +1,44 @@
+server:
+  port: 8084
+spring:
+  profiles:
+    active: dev
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: course-svc
+            uri: http://localhost:8082/
+            predicates:
+              - Path=/courses/**
+          - id: school-svc
+            uri: http://localhost:8081/
+            predicates:
+              - Path=/schools/**
+          - id: student-svc
+            uri: http://localhost:8083/
+            predicates:
+              - Path=/students/**
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cloud:
+          gateway:
+            - TRACE
+            - route:
+                RouteDefinitionLocator: INFO
