@@ -7,35 +7,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/eiakoji-me/smsws
+          uri: https://github.com/eiakoji-me/smsws-configs
           delete-untracked-branches: true
-          search-paths: 'config-service/configs'
           default-label: main
-          repos:
-            feature:
-              pattern:
-                - 'feature*'
-              uri: https://github.com/eiakoji-me/smsws
-              default-label: feature/working-with-config-server
-              search-paths: 'config-service/configs'
-            develop:
-              pattern:
-                - 'develop'
-              uri: https://github.com/eiakoji-me/smsws
-              default-label: develop
-              search-paths: 'config-service/configs'
-            stage:
-              pattern:
-                - 'stage'
-              uri: https://github.com/eiakoji-me/smsws
-              default-label: stage
-              search-paths: 'config-service/configs'
-            local:
-              pattern:
-                - 'local'
-              uri: file:${LOCAL_CONFIGSVC_ROOT}/config-service
-              default-label: feature/working-with-config-server
-              search-paths: 'config-service/configs'
 #management:
 #  endpoints:
 #    web:
