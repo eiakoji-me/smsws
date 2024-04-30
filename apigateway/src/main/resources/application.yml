@@ -10,17 +10,27 @@ spring:
       mvc:
         routes:
           - id: course-svc
-            uri: http://localhost:8082/
+            uri: lb://COURSE-SERVICE
             predicates:
               - Path=/courses/**
           - id: school-svc
-            uri: http://localhost:8081/
+            uri: lb://SCHOOL-SERVICE
             predicates:
               - Path=/schools/**
           - id: student-svc
-            uri: http://localhost:8083/
+            uri: lb://STUDENT-SVC
             predicates:
               - Path=/students/**
+          - id: eureka-server
+            uri: http://localhost:8761
+            predicates:
+              - Path=/eureka/main
+            filters:
+              - SetPath=/
+          - id: eureka-server-static
+            uri: http://localhost:8761
+            predicates:
+              - Path=/eureka/**
 management:
   tracing:
     enabled: true
@@ -39,6 +49,6 @@ logging:
       springframework:
         cloud:
           gateway:
-            - TRACE
+            - trace
             - route:
-                RouteDefinitionLocator: INFO
+                RouteDefinitionLocator: info
