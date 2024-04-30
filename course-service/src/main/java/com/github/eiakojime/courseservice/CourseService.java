@@ -1,6 +1,7 @@
 package com.github.eiakojime.courseservice;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.ws.rs.InternalServerErrorException;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +33,13 @@ public class CourseService {
 @RequiredArgsConstructor
 class CourseControllerRest {
 	private final CourseRepository courseRepository;
+	private int numberOfAttempts = 0;
 
 	@GetMapping
-	@CircuitBreaker(name="courseBreaker", fallbackMethod = "findAllFallback")
+//	@CircuitBreaker(name="courseBreaker", fallbackMethod = "findAllFallback")
+	@Retry(name="courseRetry", fallbackMethod = "findAllFallback")
 	Iterable<Course> findAll() {
+		System.out.println("Finding all courses, Attempts: %s".formatted(++numberOfAttempts));
 		throw new InternalServerErrorException();
 		//return courseRepository.findAll();
 	}
