@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -33,10 +34,14 @@ class CourseControllerRest {
 	private final CourseRepository courseRepository;
 
 	@GetMapping
-	@CircuitBreaker(name="courseBreaker")
+	@CircuitBreaker(name="courseBreaker", fallbackMethod = "findAllFallback")
 	Iterable<Course> findAll() {
-		//throw new InternalServerErrorException();
-		return courseRepository.findAll();
+		throw new InternalServerErrorException();
+		//return courseRepository.findAll();
+	}
+
+	public Iterable<Course> findAllFallback(Exception e) {
+		return new ArrayList<>();
 	}
 
 	@GetMapping("/{id}")
