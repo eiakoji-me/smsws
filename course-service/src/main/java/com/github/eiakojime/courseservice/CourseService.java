@@ -1,5 +1,7 @@
 package com.github.eiakojime.courseservice;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import jakarta.ws.rs.InternalServerErrorException;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
@@ -31,7 +33,9 @@ class CourseControllerRest {
 	private final CourseRepository courseRepository;
 
 	@GetMapping
+	@CircuitBreaker(name="courseBreaker")
 	Iterable<Course> findAll() {
+		//throw new InternalServerErrorException();
 		return courseRepository.findAll();
 	}
 
@@ -45,13 +49,13 @@ class CourseControllerRest {
 
 	@GetMapping("/name/{name}")
 	Iterable<Course> findByName(@PathVariable String name) {
-		//Assert.state(Character.isUpperCase(name.charAt(0)), "The name must start with an upper case!");
+		Assert.state(Character.isUpperCase(name.charAt(0)), "The name must start with an upper case!");
 		return courseRepository.findByNameContains(name);
 	}
 
 	@GetMapping("/department/{name}")
 	Iterable<Course> findByDepartment(@PathVariable String name) {
-		//Assert.state(Character.isUpperCase(name.charAt(0)), "The name must start with an upper case!");
+		Assert.state(Character.isUpperCase(name.charAt(0)), "The name must start with an upper case!");
 		return courseRepository.findByDepartmentContains(name);
 	}
 }

@@ -17,7 +17,9 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.StreamSupport;
 
 interface SchoolRepository extends CrudRepository<School, UUID> {
   Iterable<School> findByNameContains(String filter);
@@ -41,17 +43,17 @@ public class SchoolService {
     SpringApplication.run(SchoolService.class, args);
   }
 
-  @Bean
-  ApplicationRunner init(CourseClient client) {
-    return args -> {
-      try {
-        Iterable<Course> courses = client.getAllCourses();
-        System.out.println(courses);
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    };
-  }
+//  @Bean
+//  ApplicationRunner init(CourseClient client) {
+//    return args -> {
+//      try {
+//        Iterable<Course> courses = client.getAllCourses();
+//        System.out.println(courses);
+//      } catch (Exception e) {
+//        System.out.println(e.getMessage());
+//      }
+//    };
+//  }
 
 }
 
@@ -60,10 +62,14 @@ public class SchoolService {
 @RequiredArgsConstructor
 class SchoolControllerRest {
   private final SchoolRepository repository;
+  private final CourseClient courseClient;
 
   @GetMapping
   Iterable<School> findAll() {
-		return repository.findAll();
+    Iterable<Course> courses = courseClient.getAllCourses();
+    long coursesSize = StreamSupport.stream(courses.spliterator(),false).count();
+    System.out.println("Fetched %d courses successfully".formatted(coursesSize));
+    return repository.findAll();
   }
 
   @GetMapping("/{id}")
