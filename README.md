@@ -51,21 +51,25 @@ PROJECT_ROOT =
 
 ## Dependencies
 
-- Docker Compose
+- Docker-compose
+- Fault tolerance with Resilence4j
 - GraalVM
-- Micrometer Metrics
 - OpenFeign
 - PostgreSQL
-- Rest Template (Load Balanced)
+- Rest Template with load balancing
 - Spring Actuator
-- Spring Cloud Config Server
+- Spring cloud Gateway
+- Spring cloud Config Server
 - Spring GraphQL
-- Spring Cloud Eureka
-- Zipkin
+- Spring cloud Eureka
+- Zipkin distributed tracing
 
 ## Useful resources
 
-- Visit [mark down badges](https://ileriayo.github.io/markdown-badges/) to add badges related to tech stack for this repo
+- Visit [Mark down badges](https://ileriayo.github.io/markdown-badges/) to view cool badges for your repos
 - Visit [Spring CLoud Netflix](https://cloud.spring.io/spring-cloud-netflix/reference/html/) to learn more about Eureka
 - Visit [Zipkin Quick start](https://zipkin.io/pages/quickstart) to learn more about zipkin server
 - Visit [Micrometer.io](https://micrometer.io/) to learn more on working with metrics
+- Visit [https://resilience4j.readme.io/](https://resilience4j.readme.io/) to learn more about Resilience4j
+- Visit [https://cloud.spring.io/spring-cloud-gateway/reference/html/](https://cloud.spring.io/spring-cloud-gateway/reference/html/) learn more about spring cloud gateway
+- Learn more about RabbitMQ at [https://www.rabbitmq.com/](https://www.rabbitmq.com/)
