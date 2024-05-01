@@ -1,5 +1,7 @@
 package com.github.eiakojime.schoolservice;
 
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
@@ -17,6 +19,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
@@ -65,11 +68,17 @@ class SchoolControllerRest {
   private final CourseClient courseClient;
 
   @GetMapping
+  @RateLimiter(name = "schoolRateLimiter", fallbackMethod = "schoolRateLimiterFallback")
   Iterable<School> findAll() {
     Iterable<Course> courses = courseClient.getAllCourses();
     long coursesSize = StreamSupport.stream(courses.spliterator(),false).count();
     System.out.println("Fetched %d courses successfully".formatted(coursesSize));
     return repository.findAll();
+  }
+
+  public Iterable<Course> courseRateLimiterFallback(Exception e){
+    System.out.println("Request denied with exception: %s".formatted(e.getMessage()));
+    return new ArrayList<>();
   }
 
   @GetMapping("/{id}")
@@ -116,6 +125,13 @@ class GlobalExceptionHandlers {
   ProblemDetail handle(IllegalArgumentException illegalArgumentException) {
     var pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND.value());
     pd.setDetail(illegalArgumentException.getLocalizedMessage());
+    return pd;
+  }
+
+  @ExceptionHandler
+  ProblemDetail handle(RequestNotPermitted requestNotPermitted) {
+    var pd = ProblemDetail.forStatus(HttpStatus.TOO_MANY_REQUESTS.value());
+    pd.setDetail(requestNotPermitted.getLocalizedMessage());
     return pd;
   }
 }

@@ -51,7 +51,19 @@ resilience4j:
         sliding-window-type: count_based
   retry:
     instances:
-      courseRetryb:
+      courseRetry:
         max-attempts: 5
         wait-duration:
           seconds: 2
+  ratelimiter:
+    metrics:
+      enabled: true
+    instances:
+      courseRateLimiter:
+        register-health-indicator: true
+        limit-for-period: 10
+        timeout-duration: 0s
+        limit-refresh-period: 5s
+        allow-health-indicator-to-fail: true
+        subscribe-for-events: true
+        event-consumer-buffer-size: 50
