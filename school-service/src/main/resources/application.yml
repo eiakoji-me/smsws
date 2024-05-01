@@ -33,3 +33,34 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     register-with-eureka: true
     fetch-registry: true
+resilience4j:
+  circuitbreaker:
+    instances:
+      schoolBreaker:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        wait-duration-in-open-state:
+          seconds: 10
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        sliding-window-type: count_based
+  retry:
+    instances:
+      schoolRetry:
+        max-attempts: 5
+        wait-duration:
+          seconds: 2
+  ratelimiter:
+    metrics:
+      enabled: true
+    instances:
+      schoolRateLimiter:
+        register-health-indicator: true
+        limit-for-period: 10
+        timeout-duration: 0s
+        limit-refresh-period: 5s
+        allow-health-indicator-to-fail: true
+        subscribe-for-events: true
+        event-consumer-buffer-size: 50
