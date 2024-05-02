@@ -49,6 +49,39 @@ spring init --java-version=21 \
 PROJECT_ROOT = 
 ```
 
+## Gradle Tasks
+
+### Application tasks
+
+**Run Applicaiton or Tests**
+
+    gradle {service-id}:bootRun
+    gradle {service-id}:bootTestRun
+
+### Build tasks
+
+**Build jar file**: `gradle {service-id}:bootJar`
+
+**Build docker image**: `gradle {service-id}:bootBuildImage`
+
+### GraalVM Native tasks
+
+**Build native image** : `gradle {service-id}:nativeCompile`
+
+**Run native image**: `gradle {service-id}:nativeRun`
+
+**Run native tests**: `gradle {service-id}:nativeTestCompile`
+
+### Notes on working with jar CLI
+
+```
+# List content of jar file
+jar -tf path/to/file.jar
+
+# Execute jar file
+java -jar path/to/file.jar
+```
+
 ## Dependencies
 
 - Docker Compose
